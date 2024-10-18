@@ -1,27 +1,17 @@
 import React, { Component } from "react";
 
-function TableBody() {
+function TableBody({ characters }) {
+    const rows = characters.map((row, index) => {
+        return (
+            <tr key={index}>
+                <td>{row.name}</td>
+                <td>{row.job}</td>
+            </tr>
+        );
+    });
+
     // Return if single line, needs not parenthenses
-    return (
-        <tbody>
-            <tr>
-                <td>Charlie</td>
-                <td>Janitor</td>
-            </tr>
-            <tr>
-                <td>Mac</td>
-                <td>Bouncer</td>
-            </tr>
-            <tr>
-                <td>Dee</td>
-                <td>Aspiring actress</td>
-            </tr>
-            <tr>
-                <td>Dennis</td>
-                <td>Bartender</td>
-            </tr>
-        </tbody>
-    );
+    return <tbody> {rows}</tbody>
 }
 
 function TableHeader() {
@@ -39,10 +29,11 @@ function TableHeader() {
 class Table extends Component {
     // Return if single line, needs not parenthenses
     render() {
+        const { characters } = this.props;
         return (
             <table>
                 <TableHeader />
-                <TableBody />
+                <TableBody characters={characters} />
             </table>
         );
     }
