@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 
-function TableBody({ characters }) {
+function TableBody(props) {
+    const { characters } = props;
     const rows = characters.map((row, index) => {
         return (
             <tr key={index}>
                 <td>{row.name}</td>
                 <td>{row.job}</td>
+                <td>
+                    <button onClick={() => props.removeCharacter(index)}>Delete</button>
+                </td>
             </tr>
         );
     });
@@ -29,11 +33,11 @@ function TableHeader() {
 class Table extends Component {
     // Return if single line, needs not parenthenses
     render() {
-        const { characters } = this.props;
+        const { characters, removeCharacter } = this.props;
         return (
             <table>
                 <TableHeader />
-                <TableBody characters={characters} />
+                <TableBody characters={characters} removeCharacter={removeCharacter} />
             </table>
         );
     }
